@@ -67,6 +67,7 @@ public class VacationPackageRepo {
         em.close();
         System.out.println("Vacation package with id " + vacationPackage.getId() + " updated");
     }
+
     public VacationPackageRepo() {
         this.entityManagerFactory =  Persistence.createEntityManagerFactory("com/travellingAgency");
         this.em = entityManagerFactory.createEntityManager();

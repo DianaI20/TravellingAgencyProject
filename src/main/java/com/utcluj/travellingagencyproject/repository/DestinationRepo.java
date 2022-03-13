@@ -50,7 +50,7 @@ public class DestinationRepo {
         em.close();
     }
     public DestinationRepo() {
-        this.entityManagerFactory = Persistence.createEntityManagerFactory("com/travellingAgency");
+        this.entityManagerFactory = Persistence.createEntityManagerFactory("TravellingAgency");
         this.em = entityManagerFactory.createEntityManager();
     }
 }

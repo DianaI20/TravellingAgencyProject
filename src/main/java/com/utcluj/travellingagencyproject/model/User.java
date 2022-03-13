@@ -15,6 +15,7 @@ public class User {
     @Column
     private String password;
 
+
     public UserType getUserType() {
         return userType;
     }
