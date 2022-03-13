@@ -10,11 +10,7 @@ public class VacationPackageRepo {
     private EntityManagerFactory entityManagerFactory ;
     private EntityManager em ;
 
-    public VacationPackageRepo() {
-        this.entityManagerFactory =  Persistence.createEntityManagerFactory("com/travellingAgency");
-        em = entityManagerFactory.createEntityManager();
 
-    }
 
     public void insertVacationPackage(VacationPackage vacationPackage){
         if(!em.getTransaction().isActive()){
@@ -59,16 +55,22 @@ public class VacationPackageRepo {
         System.out.println("Vacation package with id " + id + " deleted");
     }
 
-    public void updateVacationPackage(Long id, String vacationPackage){
+    public void updateVacationPackage(VacationPackage vacationPackage){
         if(!em.getTransaction().isActive()){
             em.getTransaction().begin();
         }
-        em.createQuery("UPDATE VacationPackage vp SET vp.name = :vacationPackage WHERE vp.id = :id").setParameter("vacationPackage", vacationPackage).
-                                                                                                        setParameter("id", id).
+        em.createQuery("UPDATE VacationPackage vp SET vp.name = :name, vp.destination = :destination WHERE vp.id = :id").
+                                                                                                        setParameter("id", vacationPackage.getId()).
+                                                                                                        setParameter("name", vacationPackage.getName()).
                                                                                                         executeUpdate();
         em.getTransaction().commit();
         em.close();
-        System.out.println("Vacation package with id " + id + " updated");
+        System.out.println("Vacation package with id " + vacationPackage.getId() + " updated");
+    }
+    public VacationPackageRepo() {
+        this.entityManagerFactory =  Persistence.createEntityManagerFactory("com/travellingAgency");
+        this.em = entityManagerFactory.createEntityManager();
+
     }
 
 }

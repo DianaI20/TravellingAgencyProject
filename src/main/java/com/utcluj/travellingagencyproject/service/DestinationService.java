@@ -12,10 +12,13 @@ public class DestinationService {
     public void addDestination(Destination destination){
         dp.insertDestination(destination);
     }
-    public List<Destination> deleteDestination(Long id){
-       return dp.getAllDestinations();
+    public void deleteDestination(Long id){
+        dp.deleteDestination(id);
     }
 
+    public List<Destination> getAllDestinations(){
+        return dp.getAllDestinations();
+    }
     public DestinationService() {
         this.dp = new DestinationRepo();
     }

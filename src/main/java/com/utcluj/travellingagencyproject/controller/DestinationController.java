@@ -3,6 +3,8 @@ package com.utcluj.travellingagencyproject.controller;
 import com.utcluj.travellingagencyproject.model.Destination;
 import com.utcluj.travellingagencyproject.service.DestinationService;
 
+import java.util.List;
+
 public class DestinationController {
 
     private DestinationService ds;
@@ -15,9 +17,10 @@ public class DestinationController {
         ds.deleteDestination(id);
     }
 
-    public void viewAllDestinations(){
-        ds.();
+    public List<Destination> viewAllDestinations(){
+        return ds.getAllDestinations();
     }
+
     public DestinationController(){
         this.ds = new DestinationService();
     }
