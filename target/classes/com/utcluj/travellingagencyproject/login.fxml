@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="388.0" prefWidth="653.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+        fx:controller="com.utcluj.travellingagencyproject.controller.ViewController">
+   <children>
+      <BorderPane prefHeight="409.0" prefWidth="660.0" style="-fx-background-color: #137Dc5;">
+         <left>
+            <AnchorPane prefHeight="390.0" prefWidth="227.0" BorderPane.alignment="CENTER">
+               <children>
+                  <ImageView fitHeight="322.0" fitWidth="214.0" layoutX="14.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@logo.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+         </left>
+         <right>
+            <AnchorPane prefHeight="388.0" prefWidth="436.0" BorderPane.alignment="CENTER">
+               <children>
+                  <ImageView fitHeight="105.0" fitWidth="130.0" layoutX="141.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@lock.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="24.0" layoutY="167.0" prefHeight="33.0" prefWidth="135.0" text="Username:" textFill="#ffe9e9">
+                     <font>
+                        <Font name="System Bold" size="23.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="24.0" layoutY="213.0" prefHeight="33.0" prefWidth="135.0" text="Password:" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="23.0" />
+                     </font>
+                  </Label>
+                  <TextField layoutX="169.0" layoutY="172.0" prefHeight="25.0" prefWidth="176.0" />
+                  <PasswordField layoutX="169.0" layoutY="217.0" prefHeight="25.0" prefWidth="176.0" />
+                  <Button layoutX="144.0" layoutY="266.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="149.0" text="Log In" />
+               </children>
+            </AnchorPane>
+         </right></BorderPane>
+   </children>
+</VBox>
