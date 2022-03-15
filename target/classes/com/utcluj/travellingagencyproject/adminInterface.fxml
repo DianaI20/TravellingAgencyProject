@@ -12,80 +12,85 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-<AnchorPane prefHeight="200.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.utcluj.travellingagencyproject.controller.AdminInterfaceController">
+<AnchorPane prefHeight="690.0" prefWidth="1249.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.utcluj.travellingagencyproject.controller.AdminInterfaceController">
    <children>
-      <TabPane prefHeight="679.0" prefWidth="1108.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane layoutX="-1.0" prefHeight="697.0" prefWidth="1249.0" tabClosingPolicy="UNAVAILABLE">
          <tabs>
             <Tab closable="false" text="Vacation Packages">
                <content>
                   <BorderPane prefHeight="526.0" prefWidth="546.0">
                      <left>
-                        <ScrollPane prefHeight="650.0" prefWidth="672.0" BorderPane.alignment="CENTER">
+                        <ScrollPane prefHeight="200.0" prefWidth="841.0" BorderPane.alignment="CENTER">
                            <content>
-                              <TableView prefHeight="628.0" prefWidth="670.0">
+                              <TableView fx:id="vpTable" prefHeight="667.0" prefWidth="1070.0">
                                  <columns>
-                                    <TableColumn prefWidth="75.0" text="Id" />
-                                    <TableColumn prefWidth="108.0" text="Name" />
-                                 </columns>
-                              </TableView>
-                           </content>
-                        </ScrollPane>
-                     </left>
-                     <center>
-                        <AnchorPane prefHeight="650.0" prefWidth="437.0" BorderPane.alignment="CENTER">
-                           <children>
-                              <Button layoutX="123.0" layoutY="382.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="191.0" text="Add Vacation Package " />
-                              <Button layoutX="123.0" layoutY="501.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="191.0" text="Delete" />
-                              <Button layoutX="123.0" layoutY="565.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="191.0" text="Edit" />
-                              <Button layoutX="123.0" layoutY="441.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="191.0" text="View all vacation packages" />
-                              <Label layoutX="61.0" layoutY="77.0" text="Name:" />
-                              <Label layoutX="61.0" layoutY="112.0" text="Destination:" />
-                              <Label layoutX="63.0" layoutY="157.0" prefHeight="17.0" prefWidth="61.0" text="Price: " />
-                              <Label layoutX="61.0" layoutY="198.0" prefHeight="16.0" prefWidth="105.0" text="No. of people:" />
-                              <Label layoutX="61.0" layoutY="235.0" prefHeight="16.0" prefWidth="105.0" text="Starting date:" />
-                              <Label layoutX="61.0" layoutY="273.0" prefHeight="16.0" prefWidth="105.0" text="Ending date: " />
-                              <DatePicker layoutX="164.0" layoutY="231.0" prefHeight="14.0" prefWidth="153.0" />
-                              <DatePicker layoutX="164.0" layoutY="269.0" prefHeight="14.0" prefWidth="153.0" />
-                              <TextField layoutX="166.0" layoutY="73.0" />
-                              <TextField layoutX="166.0" layoutY="108.0" />
-                              <TextField layoutX="166.0" layoutY="153.0" />
-                              <TextField layoutX="165.0" layoutY="194.0" prefHeight="25.0" prefWidth="150.0" />
-                           </children>
-                        </AnchorPane>
-                     </center>
-                  </BorderPane>
-               </content>
-            </Tab>
-            <Tab closable="false" text="Destination">
-               <content>
-                  <BorderPane prefHeight="526.0" prefWidth="546.0">
-                     <left>
-                        <ScrollPane prefHeight="650.0" prefWidth="679.0" BorderPane.alignment="CENTER">
-                           <content>
-                              <TableView fx:id="table" prefHeight="638.0" prefWidth="673.0">
-                                 <columns>
-                                    <TableColumn fx:id="destinationId" prefWidth="172.0" text="Destination id" />
-                                    <TableColumn fx:id="destinationName" prefWidth="172.0" text="Destination name" />
+                                    <TableColumn fx:id="vpId" prefWidth="75.0" text="Id" />
+                                    <TableColumn fx:id="vpName" minWidth="0.0" prefWidth="164.0" text="Name" />
+                                    <TableColumn fx:id="vpPrice" prefWidth="62.0" text="Price" />
+                                    <TableColumn fx:id="dst" minWidth="0.0" prefWidth="99.0" text="Destination" />
+                                    <TableColumn fx:id="noAvailableSeats" prefWidth="115.0" text="Available seats" />
+                                    <TableColumn fx:id="maximumSeats" prefWidth="127.0" text="Maximum no. seats" />
+                                    <TableColumn fx:id="vpSts" minWidth="1.0" prefWidth="135.0" text="Status" />
+                                    <TableColumn fx:id="startingDate" minWidth="0.0" prefWidth="94.0" text="Starting date" />
+                                    <TableColumn fx:id="endingDate" prefWidth="94.0" text="Ending date" />
+                                    <TableColumn fx:id="endingDate1" prefWidth="94.0" text="Ending date" />
                                  </columns>
                               </TableView>
                            </content>
                         </ScrollPane>
                      </left>
                      <right>
+                        <AnchorPane prefHeight="668.0" prefWidth="326.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Button layoutX="123.0" layoutY="382.0" mnemonicParsing="false" onAction="#addVacationPackage" prefHeight="38.0" prefWidth="191.0" text="Add Vacation Package " />
+                              <Button layoutX="123.0" layoutY="501.0" mnemonicParsing="false" onAction="#deleteVacationPackage" prefHeight="38.0" prefWidth="191.0" text="Delete" />
+                              <Button layoutX="123.0" layoutY="565.0" mnemonicParsing="false" onAction="#editVacationPackage" prefHeight="38.0" prefWidth="191.0" text="Edit" />
+                              <Button layoutX="123.0" layoutY="441.0" mnemonicParsing="false" onAction="#viewVacationPackages" prefHeight="38.0" prefWidth="191.0" text="View all vacation packages" />
+                              <Label layoutX="61.0" layoutY="77.0" text="Name:" />
+                              <Label layoutX="61.0" layoutY="112.0" text="Destination ID: " />
+                              <Label layoutX="63.0" layoutY="157.0" prefHeight="17.0" prefWidth="61.0" text="Price: " />
+                              <Label layoutX="61.0" layoutY="198.0" prefHeight="16.0" prefWidth="105.0" text="No. of people:" />
+                              <Label layoutX="61.0" layoutY="235.0" prefHeight="16.0" prefWidth="105.0" text="Starting date:" />
+                              <Label layoutX="61.0" layoutY="273.0" prefHeight="16.0" prefWidth="105.0" text="Ending date: " />
+                              <DatePicker fx:id="startingDateField" layoutX="164.0" layoutY="231.0" prefHeight="14.0" prefWidth="153.0" />
+                              <DatePicker fx:id="endingDateField" layoutX="164.0" layoutY="269.0" prefHeight="14.0" prefWidth="153.0" />
+                              <TextField fx:id="vpNameField" layoutX="166.0" layoutY="73.0" />
+                              <TextField fx:id="vpDestField" layoutX="166.0" layoutY="108.0" />
+                              <TextField fx:id="priceField" layoutX="166.0" layoutY="153.0" />
+                              <TextField fx:id="noPeopleField" layoutX="165.0" layoutY="194.0" prefHeight="25.0" prefWidth="150.0" />
+                              <Button fx:id="signOutBtn" layoutX="240.0" layoutY="629.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="155.0" text="Sign Out" />
+                           </children>
+                        </AnchorPane>
+                     </right>
+                  </BorderPane>
+               </content>
+            </Tab>
+            <Tab closable="false" text="Destination">
+               <content>
+                  <BorderPane prefHeight="526.0" prefWidth="546.0">
+                     <right>
                         <AnchorPane prefHeight="650.0" prefWidth="453.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Button layoutX="123.0" layoutY="382.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="191.0" text="Add destination" />
-                              <Button layoutX="123.0" layoutY="501.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="191.0" text="Delete destination" />
+                              <Button layoutX="123.0" layoutY="382.0" mnemonicParsing="false" onAction="#addDestination" prefHeight="38.0" prefWidth="191.0" text="Add destination" />
+                              <Button layoutX="123.0" layoutY="501.0" mnemonicParsing="false" onAction="#deleteDestination" prefHeight="38.0" prefWidth="191.0" text="Delete destination" />
                               <Button layoutX="123.0" layoutY="441.0" mnemonicParsing="false" onAction="#viewDestinations" prefHeight="38.0" prefWidth="191.0" text="View all destinations" />
                               <Label layoutX="61.0" layoutY="77.0" text="Destination name:" />
                               <Label layoutX="61.0" layoutY="112.0" text="Country:" />
                               <Label layoutX="61.0" layoutY="147.0" text="City" />
-                              <TextField layoutX="174.0" layoutY="73.0" />
+                              <TextField fx:id="dstIdField" layoutX="174.0" layoutY="73.0" />
                               <TextField layoutX="174.0" layoutY="108.0" />
                               <TextField layoutX="174.0" layoutY="143.0" />
                            </children>
                         </AnchorPane>
                      </right>
+                     <left>
+                        <TableView fx:id="table" prefHeight="668.0" prefWidth="877.0" BorderPane.alignment="CENTER">
+                           <columns>
+                              <TableColumn fx:id="destinationId" prefWidth="172.0" text="Destination id" />
+                              <TableColumn fx:id="destinationName" prefWidth="172.0" text="Destination name" />
+                           </columns>
+                        </TableView>
+                     </left>
                   </BorderPane>
                </content>
             </Tab>

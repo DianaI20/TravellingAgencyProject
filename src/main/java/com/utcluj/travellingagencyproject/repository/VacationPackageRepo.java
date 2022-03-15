@@ -7,71 +7,84 @@ import javax.persistence.*;
 import java.util.List;
 
 public class VacationPackageRepo {
-    private EntityManagerFactory entityManagerFactory ;
-    private EntityManager em ;
+    private EntityManagerFactory entityManagerFactory;
+    private EntityManager em;
 
 
-
-    public void insertVacationPackage(VacationPackage vacationPackage){
-        if(!em.getTransaction().isActive()){
+    public void insertVacationPackage(VacationPackage vacationPackage) {
+        if (!em.getTransaction().isActive()) {
             em.getTransaction().begin();
         }
         em.persist(vacationPackage); // insert in database
         em.getTransaction().commit();
-        em.close();
-        System.out.println("Vacation package added! ");
+        System.out.println("Vacation package added!");
     }
 
-    public List<VacationPackage> getAllVacationPackages(){
-       // The EntityManager.createQuery and EntityManager.createNamedQuery methods are used to query the datastore by using Java Persistence query language queries.
-        if(!em.getTransaction().isActive()){
-            em.getTransaction().begin();
-        }
-        try{
-           return em.createQuery(
-                           "SELECT vp FROM VacationPackage vp")
-                                .getResultList();
-        }catch(NoResultException e){
-           System.out.println("No Vacation Package found");
-       }
-        System.out.println("Vacation package returned!");
-       em.getTransaction().commit();;
-       return null;
-    }
+    public List<VacationPackage> getAllVacationPackages() {
+        // The EntityManager.createQuery and EntityManager.createNamedQuery methods are used to query the datastore by using Java Persistence query language queries.
 
-    public void deleteVacationPackage(Long id){
-
-        if(!em.getTransaction().isActive()){
-            em.getTransaction().begin();
-        }try{
-            em.createQuery("DELETE FROM VacationPackage vp WHERE vp.id =:id").setParameter("id", id).executeUpdate(); // deletes the entry with id id
-            // set parameter will tell what the parameter ":id" will be replaced with
-            // in order to get the modifications done, we have to execute executeUpdate() method.
-        }catch(NoResultException e){
+//        if(!em.getTransaction().isActive()){
+//            em.getTransaction().begin();
+//        }
+        em = entityManagerFactory.createEntityManager();
+        em.getTransaction().begin();
+        try {
+            System.out.println("Vacation package returned!");
+            return em.createQuery("SELECT vp FROM VacationPackage vp").getResultList();
+        } catch (NoResultException e) {
             System.out.println("No Vacation Package found");
         }
+
+        em.getTransaction().commit();
+        em.close();
+        return null;
+    }
+
+    public List<VacationPackage> getAvailableVacationPackages() {
+        em = entityManagerFactory.createEntityManager();
+        em.getTransaction().begin();
+        return em.createQuery("SELECT vp FROM VacationPackage vp WHERE vp.status = 1 OR vp.status = 2").getResultList();
+
+    }
+
+    public void deleteVacationPackage(Long id) {
+
+        if (!em.getTransaction().isActive()) {
+            em.getTransaction().begin();
+        }
+        // set parameter will tell what the parameter ":id" will be replaced with
+        // in order to get the modifications done, we have to execute executeUpdate() method.
+
+        em.createQuery("DELETE FROM VacationPackage vp WHERE vp.id =:id").setParameter("id", id).executeUpdate();
         em.getTransaction().commit();
         em.close();
         System.out.println("Vacation package with id " + id + " deleted");
     }
 
-    public void updateVacationPackage(VacationPackage vacationPackage){
-        if(!em.getTransaction().isActive()){
+    public void updateVacationPackage(VacationPackage vacationPackage) {
+
+        if (!em.getTransaction().isActive()) {
             em.getTransaction().begin();
         }
-        em.createQuery("UPDATE VacationPackage vp SET vp.name = :name, vp.destination = :destination WHERE vp.id = :id").
-                                                                                                        setParameter("id", vacationPackage.getId()).
-                                                                                                        setParameter("name", vacationPackage.getName()).
-                                                                                                        executeUpdate();
+//        em.createQuery("UPDATE VacationPackage vp SET vp.name = :name, vp.destination = :destination, vp.price = :price, vp.noMaximumSeats = :noMax, vp.startingDate = :sDate, vp.endingDate =:eDate WHERE vp.id = :id").
+//                                                                                                        setParameter("id", vacationPackage.getId()).
+//                                                                                                        setParameter("name", vacationPackage.getName()).
+//                                                                                                        setParameter("destination", vacationPackage.getDestination()).
+//                                                                                                        setParameter("price", vacationPackage.getPrice()).
+//                                                                                                        setParameter("noMax", vacationPackage.getNoMaximumSeats()).
+//                                                                                                        setParameter("sDate", vacationPackage.getStartingDate()).
+//                                                                                                        setParameter("eDate", vacationPackage.getEndingDate()).
+//                                                                                                        executeUpdate();
+
         em.getTransaction().commit();
-        em.close();
+        em.clear(); // clear cache pretty much
         System.out.println("Vacation package with id " + vacationPackage.getId() + " updated");
+        em.close();
     }
 
     public VacationPackageRepo() {
-        this.entityManagerFactory =  Persistence.createEntityManagerFactory("com/travellingAgency");
+        this.entityManagerFactory = Persistence.createEntityManagerFactory("TravellingAgency");
         this.em = entityManagerFactory.createEntityManager();
-
     }
 
 }

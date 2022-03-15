@@ -1,5 +1,6 @@
 package com.utcluj.travellingagencyproject.controller;
 
+import com.utcluj.travellingagencyproject.exceptions.EmptyFieldException;
 import com.utcluj.travellingagencyproject.model.Destination;
 import com.utcluj.travellingagencyproject.service.DestinationService;
 
@@ -9,7 +10,7 @@ public class DestinationController {
 
     private DestinationService ds;
 
-    public void addDestination(Destination d){
+    public void addDestination(Destination d) throws EmptyFieldException {
         ds.addDestination(d);
     }
 
@@ -21,6 +22,9 @@ public class DestinationController {
         return ds.getAllDestinations();
     }
 
+    public Destination getDestinationById(Long id){
+        return ds.getDestinationById(id);
+    }
     public DestinationController(){
         this.ds = new DestinationService();
     }

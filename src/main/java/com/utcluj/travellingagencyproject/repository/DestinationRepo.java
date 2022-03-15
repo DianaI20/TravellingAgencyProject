@@ -1,4 +1,5 @@
 package com.utcluj.travellingagencyproject.repository;
+
 import com.utcluj.travellingagencyproject.model.Destination;
 
 import javax.persistence.EntityManager;
@@ -9,20 +10,22 @@ import java.util.List;
 
 public class DestinationRepo {
 
-    private EntityManagerFactory entityManagerFactory ;
-    private EntityManager em ;
+    private EntityManagerFactory entityManagerFactory;
+    private EntityManager em;
 
-    public void deleteDestination(Long id){
-        if(!em.getTransaction().isActive()){
+    public void deleteDestination(Destination dst) {
+        if (!em.getTransaction().isActive()) {
             em.getTransaction().begin();
         }
-        em.createQuery("DELETE FROM Destination d WHERE d.id = :id").setParameter("id", id).executeUpdate();
+        em.remove(dst);
+        // em.createQuery("DELETE FROM Destination d WHERE d.id = :id").setParameter("id", id).executeUpdate();
         em.getTransaction().commit();
+        em.clear();
 
     }
 
-    public void insertDestination(Destination destination){
-        if(!em.getTransaction().isActive()){
+    public void insertDestination(Destination destination) {
+        if (!em.getTransaction().isActive()) {
             em.getTransaction().begin();
         }
         em.persist(destination); // insert in database
@@ -30,25 +33,28 @@ public class DestinationRepo {
         System.out.println("Destination added! ");
     }
 
-    public List<Destination> getAllDestinations(){
-        if(!em.getTransaction().isActive()){
+    public List<Destination> getAllDestinations() {
+        em.clear();
+        if (!em.getTransaction().isActive()) {
             em.getTransaction().begin();
         }
-        try{
-            return em.createQuery(
-                            "SELECT dst FROM Destination dst")
-                    .getResultList();
-        }catch(NoResultException e){
-            System.out.println("No destination found");
-        }
-        System.out.println("c returned!");
-        em.getTransaction().commit();;
-        return null;
+        return em.createQuery("SELECT dst FROM Destination dst").getResultList();
+
     }
 
-    public void closeTransaction(){
+    public Destination getDestinationById(Long id) {
+        if (!em.getTransaction().isActive()) {
+            em.getTransaction().begin();
+        }
+        return (Destination) em.createQuery("SELECT dst FROM Destination dst WHERE dst.id =:id ").
+                    setParameter("id", id).
+                    getSingleResult();
+    }
+
+    public void closeTransaction() {
         em.close();
     }
+
     public DestinationRepo() {
         this.entityManagerFactory = Persistence.createEntityManagerFactory("TravellingAgency");
         this.em = entityManagerFactory.createEntityManager();

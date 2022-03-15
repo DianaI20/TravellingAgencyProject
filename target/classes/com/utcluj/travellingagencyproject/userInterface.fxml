@@ -1,34 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="526.0" prefWidth="546.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.utcluj.travellingagencyproject.controller.UserInterfaceController">
+<BorderPane prefHeight="563.0" prefWidth="1144.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.utcluj.travellingagencyproject.controller.UserInterfaceController">
    <left>
-      <ScrollPane prefHeight="650.0" prefWidth="679.0" BorderPane.alignment="CENTER">
-         <content>
-            <TableView prefHeight="521.0" prefWidth="666.0">
-               <columns>
-                  <TableColumn prefWidth="75.0" text="C1" />
-                  <TableColumn prefWidth="108.0" text="C2" />
-               </columns>
-            </TableView>
-         </content>
+      <ScrollPane prefHeight="563.0" prefWidth="857.0" BorderPane.alignment="CENTER">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="559.0" prefWidth="1146.0">
+               <children>
+                  <TableView fx:id="vpTable" layoutY="3.0" prefHeight="544.0" prefWidth="844.0">
+                     <columns>
+                        <TableColumn fx:id="vpName" prefWidth="145.0" text="Name" />
+                        <TableColumn fx:id="vpPrice" prefWidth="110.0" text="Price" />
+                        <TableColumn fx:id="dst" minWidth="0.0" prefWidth="186.0" text="Destination" />
+                        <TableColumn fx:id="startingDate" prefWidth="125.0" text="Starting date" />
+                        <TableColumn fx:id="endingDate" prefWidth="152.0" text="Ending date" />
+                        <TableColumn fx:id="noAvailableSeats" prefWidth="118.0" text="Available seats" />
+                     </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+        </content>
       </ScrollPane>
    </left>
    <right>
-      <AnchorPane prefHeight="650.0" prefWidth="372.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="563.0" prefWidth="346.0" BorderPane.alignment="CENTER">
          <children>
-            <ButtonBar layoutX="53.0" layoutY="94.0" prefHeight="40.0" prefWidth="200.0" />
-            <Button layoutX="83.0" layoutY="274.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="191.0" text="Add Destination" />
-            <Button layoutX="83.0" layoutY="333.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="191.0" text="Delete" />
-            <Button layoutX="83.0" layoutY="390.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="191.0" text="Edit" />
-            <Button layoutX="83.0" layoutY="454.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="191.0" text="View" />
+            <Button layoutX="98.0" layoutY="263.0" mnemonicParsing="false" onAction="#viewAvaialbleVacPack" prefHeight="38.0" prefWidth="191.0" text="View available vacations" />
+            <Button layoutX="98.0" layoutY="388.0" mnemonicParsing="false" onAction="#bookVacation" prefHeight="38.0" prefWidth="191.0" text="Book vacation" />
+            <Button layoutX="98.0" layoutY="328.0" mnemonicParsing="false" onAction="#viewBookedVacPck" prefHeight="38.0" prefWidth="191.0" text="View booked vacations" />
+            <Label layoutX="53.0" layoutY="164.0" prefHeight="17.0" prefWidth="61.0" text="Price: ">
+               <font>
+                  <Font size="15.0" />
+               </font></Label>
+            <Label layoutX="53.0" layoutY="88.0" prefHeight="16.0" prefWidth="105.0" text="Starting date:">
+               <font>
+                  <Font size="15.0" />
+               </font></Label>
+            <Label layoutX="53.0" layoutY="126.0" prefHeight="16.0" prefWidth="105.0" text="Ending date: ">
+               <font>
+                  <Font size="15.0" />
+               </font></Label>
+            <DatePicker fx:id="startingDateField" layoutX="169.0" layoutY="86.0" prefHeight="14.0" prefWidth="153.0" />
+            <DatePicker fx:id="endingDateField" layoutX="169.0" layoutY="124.0" prefHeight="14.0" prefWidth="153.0" />
+            <Button layoutX="126.0" layoutY="203.0" mnemonicParsing="false" onAction="#applyFilters" prefHeight="21.0" prefWidth="135.0" text="Apply filters" />
+            <Button fx:id="signOutBtn" layoutX="194.0" layoutY="524.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="148.0" text="Sign out" />
+            <TextField fx:id="lowPriceField" layoutX="131.0" layoutY="161.0" prefHeight="25.0" prefWidth="42.0" />
+            <TextField fx:id="highPriceField" layoutX="225.0" layoutY="161.0" prefHeight="25.0" prefWidth="42.0" />
+            <Label layoutX="186.0" layoutY="161.0" text="to">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Label layoutX="53.0" layoutY="57.0" prefHeight="16.0" prefWidth="105.0" text="Destination:">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="destName" layoutX="170.0" layoutY="55.0" prefHeight="25.0" prefWidth="151.0" />
          </children>
       </AnchorPane>
    </right>

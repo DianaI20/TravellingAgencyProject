@@ -1,6 +1,11 @@
 package com.utcluj.travellingagencyproject.model;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "Users")
@@ -15,6 +20,12 @@ public class User {
     @Column
     private String password;
 
+    @ManyToMany
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinTable( name = "booked_vacations",
+                joinColumns =  @JoinColumn(name = "user_id"),
+                inverseJoinColumns = @JoinColumn(name = "vacationPck_id"))
+    private List<VacationPackage> bookedVacationPackages;
 
     public UserType getUserType() {
         return userType;
@@ -41,13 +52,19 @@ public class User {
         this.password = password;
     }
 
+    public List<VacationPackage> getBookedVacationPackages() {
+        return bookedVacationPackages;
+    }
+
     public User(String username, UserType userType, String password) {
         this.username = username;
         this.userType = userType;
         this.password = password;
+        this.bookedVacationPackages = new ArrayList<>();
     }
 
     public User() {
+        this.bookedVacationPackages = new ArrayList<>();
 
     }
 }

@@ -13,5 +13,6 @@ module com.utcluj.travellingagencyproject {
     opens com.utcluj.travellingagencyproject to javafx.fxml, javafx.base;
     exports com.utcluj.travellingagencyproject;
     exports com.utcluj.travellingagencyproject.controller;
+    opens com.utcluj.travellingagencyproject.exceptions to org.hibernate.orm.core;
 
 }
