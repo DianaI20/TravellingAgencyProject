@@ -88,6 +88,11 @@ public class AdminInterfaceController {
     @FXML
     private Button signOutBtn;
 
+    public AdminInterfaceController() {
+        this.destinationController = new DestinationController();
+        this.vpController = new VacationPackageController();
+    }
+
     private List<Destination> updateTable() {
 
         ObservableList<Destination> data = FXCollections.observableArrayList();
@@ -244,9 +249,6 @@ public class AdminInterfaceController {
         alert.showAndWait();
     }
 
-    public AdminInterfaceController() {
-        this.destinationController = new DestinationController();
-        this.vpController = new VacationPackageController();
-    }
+
 
 }

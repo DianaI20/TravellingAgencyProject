@@ -5,18 +5,22 @@ import com.utcluj.travellingagencyproject.exceptions.InvalidPeriodException;
 import com.utcluj.travellingagencyproject.exceptions.LimitOfPeopleReachedException;
 import com.utcluj.travellingagencyproject.model.Destination;
 import com.utcluj.travellingagencyproject.model.VacationPackage;
-import com.utcluj.travellingagencyproject.repository.VacationPackageRepo;
+import com.utcluj.travellingagencyproject.repository.VacationPackageRepository;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class VacationPackageService {
-    private VacationPackageRepo vpr;
 
+    private VacationPackageRepository vacationPackageRepository;
+
+    public VacationPackageService() {
+        this.vacationPackageRepository = new VacationPackageRepository();
+    }
 
     public void deleteVacationPackage(Long id) {
-        vpr.deleteVacationPackage(id);
+        vacationPackageRepository.deleteVacationPackage(id);
     }
 
     public void addNewVacationPackage(String name, String price, Destination destination, String noMaximumSeats, LocalDate startingDate, LocalDate endingDate)
@@ -34,34 +38,30 @@ public class VacationPackageService {
 
         validateDate(startingDate, endingDate);
         VacationPackage vp = new VacationPackage(name, pr, destination, people, startingDate, endingDate);
-        vpr.insertVacationPackage(vp);
+        vacationPackageRepository.insertVacationPackage(vp);
     }
 
     public void  editVacationPackage(VacationPackage vp, String name, Destination dst, String price, String noOfPeople, LocalDate startingDate, LocalDate endingDate)
             throws InvalidPeriodException {
 
         this.updateVacationPackageFields(vp, name, dst, price, noOfPeople, startingDate, endingDate);
-        vpr.updateVacationPackage(vp);
+        vacationPackageRepository.updateVacationPackage(vp);
 
     }
 
     public void bookVacationPackage(VacationPackage vp) throws LimitOfPeopleReachedException {
         validateNoOfPeople(vp.getNoAvailableSeats());
         vp.setNoAvailableSeats(vp.getNoAvailableSeats() - 1);
-        vpr.updateVacationPackage(vp);
+        vacationPackageRepository.updateVacationPackage(vp);
     }
 
-
     public List<VacationPackage> getAllVacationPackages() {
-        return vpr.getAllVacationPackages();
+        return vacationPackageRepository.getAllVacationPackages();
     }
 
     public List<VacationPackage> getAvailableVacationPackages() {
-        return vpr.getAvailableVacationPackages();
+        return vacationPackageRepository.getAvailableVacationPackages();
     }
-
-
-    // filters
 
     public List<VacationPackage> filterVacationPackage(String higherPrice, String lowerPrice, String dst, LocalDate startingDate, LocalDate endingDate)
             throws InvalidPeriodException, InvalidInputException {
@@ -101,7 +101,6 @@ public class VacationPackageService {
         return vp;
 
     }
-
 
     private void validateDate(LocalDate startingDate, LocalDate endingDate) throws InvalidPeriodException {
         if (startingDate != null && endingDate != null) {
@@ -157,9 +156,7 @@ public class VacationPackageService {
     }
 
 
-    public VacationPackageService() {
-        this.vpr = new VacationPackageRepo();
-    }
+
 
 
 }

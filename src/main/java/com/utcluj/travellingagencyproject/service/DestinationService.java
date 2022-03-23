@@ -2,14 +2,14 @@ package com.utcluj.travellingagencyproject.service;
 
 import com.utcluj.travellingagencyproject.exceptions.EmptyFieldException;
 import com.utcluj.travellingagencyproject.model.Destination;
-import com.utcluj.travellingagencyproject.repository.DestinationRepo;
+import com.utcluj.travellingagencyproject.repository.DestinationRepository;
 
 import javax.persistence.NoResultException;
 import java.util.List;
 
 public class DestinationService {
 
-    private DestinationRepo dp;
+    private DestinationRepository dp;
 
     public void addDestination(Destination destination) throws EmptyFieldException {
         validateInput(destination);
@@ -37,6 +37,6 @@ public class DestinationService {
     }
 
     public DestinationService() {
-        this.dp = new DestinationRepo();
+        this.dp = new DestinationRepository();
     }
 }

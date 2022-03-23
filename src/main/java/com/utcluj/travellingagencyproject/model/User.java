@@ -22,10 +22,15 @@ public class User {
 
     @ManyToMany
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinTable( name = "booked_vacations",
-                joinColumns =  @JoinColumn(name = "user_id"),
-                inverseJoinColumns = @JoinColumn(name = "vacationPck_id"))
+    @JoinTable(name = "booked_vacations",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "vacationPck_id"))
     private List<VacationPackage> bookedVacationPackages;
+
+    public User() {
+        this.bookedVacationPackages = new ArrayList<>();
+
+    }
 
     public UserType getUserType() {
         return userType;
@@ -63,10 +68,7 @@ public class User {
         this.bookedVacationPackages = new ArrayList<>();
     }
 
-    public User() {
-        this.bookedVacationPackages = new ArrayList<>();
 
-    }
 }
 
 

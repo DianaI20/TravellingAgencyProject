@@ -64,6 +64,12 @@ public class UserInterfaceController {
     private Button signOutBtn;
 
 
+
+    public UserInterfaceController() {
+        this.vpc = new VacationPackageController();
+        this.userController = new UserController();
+    }
+
     @FXML
     public void viewAvaialbleVacPack() {
         vpName.setCellValueFactory(new PropertyValueFactory<VacationPackage, String>("name"));
@@ -149,12 +155,6 @@ public class UserInterfaceController {
         return data;
     }
 
-
-
-    public UserInterfaceController() {
-        this.vpc = new VacationPackageController();
-        this.userController = new UserController();
-    }
 
 
 }

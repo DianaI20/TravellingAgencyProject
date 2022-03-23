@@ -4,19 +4,15 @@ package com.utcluj.travellingagencyproject.controller;
 import com.utcluj.travellingagencyproject.exceptions.InvalidInputException;
 import com.utcluj.travellingagencyproject.exceptions.PasswordTooShortException;
 import com.utcluj.travellingagencyproject.model.User;
-import com.utcluj.travellingagencyproject.model.VacationPackage;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import javax.persistence.EntityExistsException;
 import javax.persistence.NoResultException;
-import javax.persistence.Persistence;
 import javax.persistence.PersistenceException;
 
 
@@ -28,8 +24,8 @@ public class ViewController {
     private Stage userStage;
     private Stage loginStage;
     private User currentUser;
-    private UserInterfaceController usic;
-    private AdminInterfaceController adic;
+    private UserInterfaceController userInterfaceController;
+    private AdminInterfaceController adminInterfaceController;
 
     @FXML
     public TextField usernameField;
@@ -37,11 +33,16 @@ public class ViewController {
     @FXML
     public PasswordField passwordField;
 
+
+    public ViewController() {
+        this.userController = new UserController();
+    }
+
     @FXML
     public void logIn() {
         try {
             currentUser = userController.login(usernameField.getText(), passwordField.getText());
-            usic.setCurrentUser(currentUser);
+            userInterfaceController.setCurrentUser(currentUser);
             switchToUserWindow();
         } catch (NoResultException np) {
             createInformationWindow("Wrong username or password", Alert.AlertType.ERROR);
@@ -85,32 +86,32 @@ public class ViewController {
         this.loginStage = logInWindow;
         this.adminStage = adminWindow;
         this.userStage = userWindow;
-        this.usic = usic;
-        this.adic = adic;
+        this.userInterfaceController = usic;
+        this.adminInterfaceController = adic;
         signOut();
 
     }
 
     private void signOut() {
-        usic.getSignOutBtn().setOnAction(new EventHandler<ActionEvent>() {
+        userInterfaceController.getSignOutBtn().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 userStage.hide();
                 loginStage.show();
                 passwordField.clear();
                 usernameField.clear();
-                usic.getVpTable().getItems().clear();
+                userInterfaceController.getVpTable().getItems().clear();
             }
         });
-        adic.getSignOutBtn().setOnAction(new EventHandler<ActionEvent>() {
+        adminInterfaceController.getSignOutBtn().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 adminStage.hide();
                 loginStage.show();
                 passwordField.clear();
                 usernameField.clear();
-                adic.getTable().getItems().clear();
-                adic.getVpTable().getItems().clear();
+                adminInterfaceController.getTable().getItems().clear();
+                adminInterfaceController.getVpTable().getItems().clear();
             }
         });
     }
@@ -122,7 +123,4 @@ public class ViewController {
         alert.showAndWait();
     }
 
-    public ViewController() {
-        this.userController = new UserController();
-    }
 }

@@ -6,7 +6,7 @@ import com.utcluj.travellingagencyproject.model.VacationPackage;
 
 import javax.persistence.*;
 
-public class UserRepo {
+public class UserRepository {
 
     private EntityManagerFactory entityManagerFactory;
     private EntityManager em;
@@ -52,7 +52,7 @@ public class UserRepo {
         em.close();
     }
 
-    public UserRepo() {
+    public UserRepository() {
         this.entityManagerFactory = Persistence.createEntityManagerFactory("TravellingAgency");
         this.em = entityManagerFactory.createEntityManager();
     }

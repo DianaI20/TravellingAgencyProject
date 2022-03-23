@@ -4,11 +4,10 @@ import com.utcluj.travellingagencyproject.model.Destination;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import java.util.List;
 
-public class DestinationRepo {
+public class DestinationRepository {
 
     private EntityManagerFactory entityManagerFactory;
     private EntityManager em;
@@ -55,7 +54,7 @@ public class DestinationRepo {
         em.close();
     }
 
-    public DestinationRepo() {
+    public DestinationRepository() {
         this.entityManagerFactory = Persistence.createEntityManagerFactory("TravellingAgency");
         this.em = entityManagerFactory.createEntityManager();
     }

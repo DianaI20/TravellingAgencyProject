@@ -10,6 +10,10 @@ public class DestinationController {
 
     private DestinationService ds;
 
+    public DestinationController(){
+        this.ds = new DestinationService();
+    }
+
     public void addDestination(Destination d) throws EmptyFieldException {
         ds.addDestination(d);
     }
@@ -24,8 +28,5 @@ public class DestinationController {
 
     public Destination getDestinationById(Long id){
         return ds.getDestinationById(id);
-    }
-    public DestinationController(){
-        this.ds = new DestinationService();
     }
 }

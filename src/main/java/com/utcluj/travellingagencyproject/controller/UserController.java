@@ -11,7 +11,10 @@ import com.utcluj.travellingagencyproject.service.UserService;
 
 public class UserController {
     private UserService userService;
-    private VacationPackageController vacationController;
+
+    public UserController() {
+        this.userService = new UserService();
+    }
 
     public User login(String username, String password){
         return userService.getUserByUsernameAndPassword(username, password);
@@ -33,9 +36,6 @@ public class UserController {
         this.userService = new UserService();
     }
 
-    public UserController() {
-        this.userService = new UserService();
-    }
 
 
 }

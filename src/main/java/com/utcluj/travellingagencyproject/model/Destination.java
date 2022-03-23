@@ -27,6 +27,9 @@ public class Destination {
         this.name = name;
     }
 
+    public Destination() {
+    }
+
     public String getName() {
         return name;
     }
@@ -40,6 +43,5 @@ public class Destination {
         return name;
     }
 
-    public Destination() {
-    }
+
 }

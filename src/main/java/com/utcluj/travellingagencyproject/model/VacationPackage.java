@@ -45,6 +45,41 @@ public class VacationPackage {
     @ManyToMany(mappedBy = "bookedVacationPackages", cascade = CascadeType.REMOVE)
     List<User> userList;
 
+
+    public VacationPackage(String name, float price, Destination destination, int noMaximumSeats, LocalDate startingDate, LocalDate endingDate) {
+        this.name = name;
+        this.price = price;
+        this.status = VacationStatus.NOT_BOOKED;
+        this.destination = destination;
+        this.noAvailableSeats = noMaximumSeats;
+        this.noMaximumSeats = noMaximumSeats;
+        this.startingDate = startingDate;
+        this.endingDate = endingDate;
+        this.userList = new ArrayList<>();
+    }
+
+    public VacationPackage(Long id, String name, float price, Destination destination, int noMaximumSeats, LocalDate startingDate, LocalDate endingDate) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.status = VacationStatus.NOT_BOOKED;
+        this.destination = destination;
+        this.noAvailableSeats = noMaximumSeats;
+        this.noMaximumSeats = noMaximumSeats;
+        this.startingDate = startingDate;
+        this.endingDate = endingDate;
+        this.userList = new ArrayList<>();
+    }
+
+    public VacationPackage(String name, float price) {
+        this.name = name;
+        this.price = price;
+    }
+
+    public VacationPackage() {
+
+    }
+
     public String getName() {
         return name;
     }
@@ -85,23 +120,20 @@ public class VacationPackage {
         this.noAvailableSeats = noAvailableSeats;
         this.setStatus();
     }
+
     public void setStatus() {
 
-        if(noAvailableSeats == noMaximumSeats){
-                this.status = VacationStatus.NOT_BOOKED;
-        }else{
-            if(noAvailableSeats == 0){
+        if (noAvailableSeats == noMaximumSeats) {
+            this.status = VacationStatus.NOT_BOOKED;
+        } else {
+            if (noAvailableSeats == 0) {
                 this.status = VacationStatus.BOOKED;
-            }else{
+            } else {
                 this.status = VacationStatus.IN_PROGRESS;
             }
         }
     }
 
-    public VacationPackage(String name, float price) {
-        this.name = name;
-        this.price = price;
-    }
 
     public void setId(Long id) {
         this.id = id;
@@ -115,10 +147,6 @@ public class VacationPackage {
         this.price = price;
     }
 
-    public void setStatus(VacationStatus status) {
-        this.status = status;
-    }
-
     public void setDestination(Destination destination) {
         this.destination = destination;
     }
@@ -127,46 +155,5 @@ public class VacationPackage {
         this.noMaximumSeats = noMaximumSeats;
     }
 
-    public void setStartingDate(LocalDate startingDate) {
-        this.startingDate = startingDate;
-    }
-
-    public void setEndingDate(LocalDate endingDate) {
-        this.endingDate = endingDate;
-    }
-
-    public void setUserList(List<User> userList) {
-        this.userList = userList;
-    }
-
-    public VacationPackage(){
-
-    }
-
-
-    public VacationPackage(String name, float price, Destination destination, int noMaximumSeats, LocalDate startingDate, LocalDate endingDate) {
-        this.name = name;
-        this.price = price;
-        this.status = VacationStatus.NOT_BOOKED;
-        this.destination = destination;
-        this.noAvailableSeats = noMaximumSeats;
-        this.noMaximumSeats = noMaximumSeats;
-        this.startingDate = startingDate;
-        this.endingDate = endingDate;
-        this.userList = new ArrayList<>();
-    }
-
-    public VacationPackage(Long id, String name, float price, Destination destination, int noMaximumSeats, LocalDate startingDate, LocalDate endingDate) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        this.status = VacationStatus.NOT_BOOKED;
-        this.destination = destination;
-        this.noAvailableSeats = noMaximumSeats;
-        this.noMaximumSeats = noMaximumSeats;
-        this.startingDate = startingDate;
-        this.endingDate = endingDate;
-        this.userList = new ArrayList<>();
-    }
 
 }

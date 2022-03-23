@@ -7,20 +7,24 @@ import com.utcluj.travellingagencyproject.model.User;
 import com.utcluj.travellingagencyproject.model.UserType;
 import com.utcluj.travellingagencyproject.model.VacationPackage;
 import com.utcluj.travellingagencyproject.exceptions.PasswordTooShortException;
-import com.utcluj.travellingagencyproject.repository.UserRepo;
+import com.utcluj.travellingagencyproject.repository.UserRepository;
 
 import javax.persistence.NoResultException;
 
 public class UserService {
-    private UserRepo userRepo;
+    private UserRepository userRepository;
+
+    public UserService() {
+        this.userRepository = new UserRepository();
+    };
 
     public User getUserByUsernameAndPassword(String username, String password) {
-        return userRepo.getUserByUsernameAndPassword(username, password);
+        return userRepository.getUserByUsernameAndPassword(username, password);
     }
 
     public User getUserByUsername(String username) throws NoResultException {
 
-        return userRepo.getUserByUsername(username);
+        return userRepository.getUserByUsername(username);
 
     }
 
@@ -28,17 +32,17 @@ public class UserService {
         validateUsername(username);
         validatePassword(password);
         User user = new User(username, UserType.REGULAR, password);
-        userRepo.insertNewUser(user);
+        userRepository.insertNewUser(user);
     }
 
 
     public void bookVacationPackage(User user, VacationPackage vp) throws LimitOfPeopleReachedException {
         validateNumber(vp.getNoAvailableSeats());
-        userRepo.bookVacation(user, vp);
+        userRepository.bookVacation(user, vp);
     }
 
     public void UserService() {
-        this.userRepo = new UserRepo();
+        this.userRepository = new UserRepository();
     }
 
     private void validateUsername(String username) throws InvalidInputException {
@@ -55,7 +59,5 @@ public class UserService {
         if (p.equals(0)) throw new LimitOfPeopleReachedException();
     }
 
-    public UserService() {
-        this.userRepo = new UserRepo();
-    }
+
 }
